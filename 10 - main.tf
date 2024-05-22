@@ -14,6 +14,13 @@ resource "boundary_host_catalog_static" "this" {
   scope_id    = data.boundary_scope.this.id
 }
 
+resource "vault_token" "this" {
+  no_parent = true
+  period    = "2h"
+  policies = [
+    "ldap_reader"
+  ]
+}
 
 module "target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
@@ -35,6 +42,8 @@ module "target" {
     port = 443
     credential_paths = ["ldap/creds/vsphere_access"]
   }]
+  credential_store_token = vault_token.this.token
+  vault_address = "https://vault.hashicorp.local:8200"
 }
 
 # resource "boundary_alias_target" "this" {
