@@ -4,7 +4,7 @@ data "boundary_scope" "org" {
 }
 
 data "boundary_scope" "this" {
-  scope_id = boundary_scope_org.id
+  scope_id = boundary_scope.org.id
   name     = "shared_services"
 }
 
