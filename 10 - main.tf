@@ -42,7 +42,7 @@ module "target" {
     port = 443
     credential_paths = ["ldap/creds/vsphere_access"]
   }]
-  credential_store_token = vault_token.this.token
+  credential_store_token = vault_token.this.client_token
   vault_address = "https://vault.hashicorp.local:8200"
 }
 
