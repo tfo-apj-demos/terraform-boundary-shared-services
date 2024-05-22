@@ -30,7 +30,8 @@ module "target" {
     address = "10.10.0.11"
   }]
   services = [{
-    name = "http"
+    type = "tcp"
+    #name = "http"
     port = 443
     credential_paths = ["ldap/creds/vsphere_access"]
   }]
