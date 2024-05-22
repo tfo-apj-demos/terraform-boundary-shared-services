@@ -19,6 +19,7 @@ module "target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "1.0.11-alpha"
   # insert required variables here
+  project_name = "shared_services"
   host_catalog_id = boundary_host_catalog_static.this.id
   hostname_prefix = "ui"
   hosts = [{
