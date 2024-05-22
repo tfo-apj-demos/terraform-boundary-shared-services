@@ -18,7 +18,8 @@ resource "vault_token" "this" {
   no_parent = true
   period    = "2h"
   policies = [
-    "ldap_reader"
+    "ldap_reader",
+    "revoke_lease"
   ]
 }
 
