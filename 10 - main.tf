@@ -49,7 +49,6 @@ module "vault_target" {
   version = "~> 1.3"
 
   project_name    = "shared_services"
-  scope_id        = data.boundary_scope.project_scope.id
   hostname_prefix = "On-Prem Vault Access"
 
   hosts = [{
@@ -62,6 +61,4 @@ module "vault_target" {
     name             = "vault"
     port             = 8200
   }]
-
-  credential_store_token = vault_token.this.client_token
 }
