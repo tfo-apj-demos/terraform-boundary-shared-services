@@ -24,7 +24,7 @@ module "vsphere_targets" {
   version = "~> 1.3"
 
   project_name           = "shared_services"
-  hostname_prefix        = "On-Prem vSphere Admin"
+  hostname_prefix        = "On-Prem VMware Admin"
   credential_store_token = vault_token.this.client_token
   vault_address          = "https://vault.hashicorp.local:8200"
 
@@ -38,7 +38,7 @@ module "vsphere_targets" {
 
   services = [{
     type             = "tcp"
-    name             = "http"
+    name             = "VMware Access"
     port             = 443
     credential_paths = ["ldap/creds/vsphere_access"]
   }]
@@ -58,7 +58,7 @@ module "vault_target" {
 
   services = [{
     type             = "tcp"
-    name             = "vault"
+    name             = "GCVE Vault Access"
     port             = 8200
   }]
 }
