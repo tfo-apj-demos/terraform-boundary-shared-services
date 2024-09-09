@@ -8,13 +8,6 @@ data "boundary_scope" "project_scope" {
   name     = "shared_services"
 }
 
-
-resource "boundary_host_catalog_static" "this" {
-  name        = "Allowed Website access (via Transparent Session)"
-  description = "A set of web interfaces for SEs to access."
-  scope_id    = data.boundary_scope.project_scope.id
-}
-
 # Generate a Vault token for use in Boundary with a 2-hour renewal period.
 # The token is used with policies for reading LDAP credentials and revoking leases.
 resource "vault_token" "this" {
@@ -26,12 +19,18 @@ resource "vault_token" "this" {
   ]
 }
 
+resource "boundary_host_catalog_static" "vmware" {
+  name        = "Allowed Website access (via Transparent Session)"
+  description = "A set of web interfaces for VMware Admins to access."
+  scope_id    = data.boundary_scope.project_scope.id
+}
+
 module "vsphere_nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.2"
 
   project_name    = "shared_services"
-  host_catalog_id = boundary_host_catalog_static.this.id
+  host_catalog_id = boundary_host_catalog_static.vsphere.id
   hostname_prefix = "On-Prem Admin Applications"
 
   hosts = [{
@@ -53,12 +52,18 @@ module "vsphere_nsx_target" {
   vault_address          = "https://vault.hashicorp.local:8200"
 }
 
+resource "boundary_host_catalog_static" "security" {
+  name        = "Allowed Website access (via Transparent Session)"
+  description = "A set of web interfaces for Security Admins to access."
+  scope_id    = data.boundary_scope.project_scope.id
+}
+
 module "vault_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.2"
 
   project_name    = "shared_services"
-  host_catalog_id = boundary_host_catalog_static.this.id
+  host_catalog_id = boundary_host_catalog_static.security.id
   hostname_prefix = "On-Prem Vault Access"
 
   hosts = [{
