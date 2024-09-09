@@ -13,3 +13,7 @@ provider "boundary" {
   #auth_method_login_name = var.service_account_name
   #auth_method_password   = var.service_account_password
 }
+
+provider "vault" {
+  address = var.vault_address
+}

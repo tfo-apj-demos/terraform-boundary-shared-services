@@ -2,6 +2,10 @@ variable "boundary_address" {
   type = string
 }
 
+variable "vault_address" {
+  type = string
+}
+
 /*variable "service_account_authmethod_id" {
   type = string
 }
