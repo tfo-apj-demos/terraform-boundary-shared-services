@@ -26,13 +26,13 @@ resource "vault_token" "this" {
   ]
 }
 
-module "target" {
+module "vsphere_nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.2"
 
   project_name    = "shared_services"
   host_catalog_id = boundary_host_catalog_static.this.id
-  hostname_prefix = "GCVE VMware Access"
+  hostname_prefix = "On-Prem Admin Applications"
 
   hosts = [{
     hostname = "VMware vCenter"
@@ -47,6 +47,29 @@ module "target" {
     name             = "http"
     port             = 443
     credential_paths = ["ldap/creds/vsphere_access"]
+  }]
+
+  credential_store_token = vault_token.this.client_token
+  vault_address          = "https://vault.hashicorp.local:8200"
+}
+
+module "vault_target" {
+  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "~> 1.2"
+
+  project_name    = "shared_services"
+  host_catalog_id = boundary_host_catalog_static.this.id
+  hostname_prefix = "On-Prem Vault Access"
+
+  hosts = [{
+    hostname = "Vault Server"
+    address  = "172.21.15.151"  # Replace with the actual Vault server IP
+  }]
+
+  services = [{
+    type             = "tcp"
+    name             = "vault"
+    port             = 8200
   }]
 
   credential_store_token = vault_token.this.client_token
