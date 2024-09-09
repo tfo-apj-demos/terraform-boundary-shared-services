@@ -30,7 +30,7 @@ module "vsphere_nsx_target" {
   version = "~> 1.2"
 
   project_name    = "shared_services"
-  host_catalog_id = boundary_host_catalog_static.vsphere.id
+  host_catalog_id = boundary_host_catalog_static.vmware.id
   hostname_prefix = "On-Prem Admin Applications"
 
   hosts = [{
