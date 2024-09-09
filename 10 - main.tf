@@ -29,7 +29,8 @@ module "vsphere_nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.2"
 
-  project_name    = "shared_services"
+  #project_name    = "shared_services"
+  scope_id        = data.boundary_scope.project_scope.id
   host_catalog_id = boundary_host_catalog_static.vmware.id
   hostname_prefix = "On-Prem Admin Applications"
 
