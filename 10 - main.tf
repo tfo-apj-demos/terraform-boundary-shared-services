@@ -28,7 +28,7 @@ resource "vault_token" "this" {
 
 module "target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "~> 1"
+  version = "~> 1.2"
 
   project_name    = "shared_services"
   host_catalog_id = boundary_host_catalog_static.this.id
