@@ -19,7 +19,6 @@ resource "vault_token" "this" {
   ]
 }
 
-
 module "vsphere_targets" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.3"
@@ -45,9 +44,9 @@ module "vsphere_targets" {
   }]
 }
 
-/*module "vault_target" {
+module "vault_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "~> 1.2"
+  version = "~> 1.3"
 
   project_name    = "shared_services"
   scope_id        = data.boundary_scope.project_scope.id
@@ -65,5 +64,4 @@ module "vsphere_targets" {
   }]
 
   credential_store_token = vault_token.this.client_token
-  vault_address          = "https://vault.hashicorp.local:8200"
-}*/
+}
