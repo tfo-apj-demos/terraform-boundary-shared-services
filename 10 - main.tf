@@ -25,7 +25,7 @@ module "vsphere_targets" {
   version = "~> 1.3"
 
   project_name           = "shared_services"
-  hostname_prefix        = "On-Prem Admin Applications"
+  hostname_prefix        = "On-Prem vSphere Admin"
   credential_store_token = vault_token.this.client_token
   vault_address          = "https://vault.hashicorp.local:8200"
 
