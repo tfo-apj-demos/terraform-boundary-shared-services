@@ -20,7 +20,7 @@ resource "vault_token" "this" {
 }
 
 
-module "vsphere_nsx_target" {
+module "vsphere_targets" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.3"
 
