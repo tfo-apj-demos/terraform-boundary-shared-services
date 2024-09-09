@@ -19,20 +19,15 @@ resource "vault_token" "this" {
   ]
 }
 
-resource "boundary_host_catalog_static" "vmware" {
-  name        = "Allowed Website access (via Transparent Session)"
-  description = "A set of web interfaces for VMware Admins to access."
-  scope_id    = data.boundary_scope.project_scope.id
-}
 
 module "vsphere_nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "~> 1.2"
+  version = "~> 1.3"
 
-  #project_name    = "shared_services"
-  scope_id        = data.boundary_scope.project_scope.id
-  host_catalog_id = boundary_host_catalog_static.vmware.id
-  hostname_prefix = "On-Prem Admin Applications"
+  project_name           = "shared_services"
+  hostname_prefix        = "On-Prem Admin Applications"
+  credential_store_token = vault_token.this.client_token
+  vault_address          = "https://vault.hashicorp.local:8200"
 
   hosts = [{
     hostname = "VMware vCenter"
@@ -48,24 +43,14 @@ module "vsphere_nsx_target" {
     port             = 443
     credential_paths = ["ldap/creds/vsphere_access"]
   }]
-
-  credential_store_token = vault_token.this.client_token
-  vault_address          = "https://vault.hashicorp.local:8200"
 }
 
-resource "boundary_host_catalog_static" "security" {
-  name        = "Allowed Website access (via Transparent Session)"
-  description = "A set of web interfaces for Security Admins to access."
-  scope_id    = data.boundary_scope.project_scope.id
-}
-
-module "vault_target" {
+/*module "vault_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.2"
 
-  #project_name    = "shared_services"
+  project_name    = "shared_services"
   scope_id        = data.boundary_scope.project_scope.id
-  host_catalog_id = boundary_host_catalog_static.security.id
   hostname_prefix = "On-Prem Vault Access"
 
   hosts = [{
@@ -81,14 +66,4 @@ module "vault_target" {
 
   credential_store_token = vault_token.this.client_token
   vault_address          = "https://vault.hashicorp.local:8200"
-}
-
-
-# resource "boundary_alias_target" "this" {
-#   name                      = "example_alias_target"
-#   description               = "Example alias to target foo using host boundary_host_static.bar"
-#   scope_id                  = data.boundary_scope.this.id
-#   value                     = "example.bar.foo.boundary"
-#   destination_id            = boundary_target.foo.id
-#   authorize_session_host_id = boundary_host_static.bar.id
-# }
+}*/
