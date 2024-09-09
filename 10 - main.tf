@@ -30,10 +30,10 @@ module "vsphere_targets" {
 
   hosts = [{
     hostname = "VMware vCenter"
-    address  = "https://vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
+    address  = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
     }, {
     hostname = "VMware NSX"
-    address  = "https://nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
+    address  = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
   }]
 
   services = [{
@@ -53,7 +53,7 @@ module "vault_target" {
 
   hosts = [{
     hostname = "Vault Server"
-    address  = "https://vault.hashicorp.local:8200"
+    address  = "vault.hashicorp.local"
   }]
 
   services = [{
