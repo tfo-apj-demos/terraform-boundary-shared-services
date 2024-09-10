@@ -19,26 +19,23 @@ resource "vault_token" "this" {
   ]
 }
 
-module "vsphere_targets" {
+module "nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.4"
 
   project_name           = "shared_services"
-  hostname_prefix        = "On-Prem VMware Admin"
+  hostname_prefix        = "On-Prem VMware NSX Admin"
   credential_store_token = vault_token.this.client_token
   vault_address          = "https://vault.hashicorp.local:8200"
 
   hosts = [{
-    hostname = "VMware vCenter"
-    address  = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
-    }, {
     hostname = "VMware NSX"
     address  = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
   }]
 
   services = [{
     type             = "tcp"
-    name             = "VMware Access"
+    name             = "NSX Access"
     port             = 443
     credential_paths = ["ldap/creds/vsphere_access"]
   }]
