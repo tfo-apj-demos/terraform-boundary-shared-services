@@ -25,8 +25,6 @@ module "nsx_target" {
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware NSX Admin"
-  credential_store_token = vault_token.this.client_token
-  vault_address          = "https://vault.hashicorp.local:8200"
 
   hosts = [{
     hostname = "VMware NSX"
@@ -37,7 +35,6 @@ module "nsx_target" {
     type             = "tcp"
     name             = "NSX Access"
     port             = 443
-    credential_paths = ["ldap/creds/vsphere_access"]
   }]
 }
 
