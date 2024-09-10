@@ -19,7 +19,7 @@ resource "vault_token" "this" {
   ]
 }
 
-module "nsx_target" {
+/*module "nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.4"
 
@@ -80,4 +80,4 @@ module "vault_target" {
     name             = "GCVE Vault Access"
     port             = 8200
   }]
-}
+}*/
