@@ -21,7 +21,7 @@ resource "vault_token" "this" {
 
 module "vsphere_targets" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "~> 1.3"
+  version = "~> 1.4"
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware Admin"
@@ -46,7 +46,7 @@ module "vsphere_targets" {
 
 module "vault_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "~> 1.3"
+  version = "~> 1.4"
 
   project_name    = "shared_services"
   hostname_prefix = "On-Prem Vault Access"
@@ -60,6 +60,5 @@ module "vault_target" {
     type             = "tcp"
     name             = "GCVE Vault Access"
     port             = 8200
-    credential_paths = []
   }]
 }
