@@ -49,7 +49,7 @@ module "vault_target" {
   version = "~> 1.4"
 
   project_name    = "shared_services"
-  hostname_prefix = "On-Prem Vault Access"
+  hostname_prefix = "On-Prem Vault"
 
   hosts = [{
     hostname = "Vault Server"
