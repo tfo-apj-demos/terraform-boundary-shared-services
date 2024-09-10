@@ -19,7 +19,7 @@ resource "vault_token" "this" {
   ]
 }
 
-module "nsx_target" {
+/*module "nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
   version = "~> 1.4"
 
@@ -39,7 +39,7 @@ module "nsx_target" {
     port             = 443
     credential_paths = ["ldap/creds/vsphere_access"]
   }]
-}
+}*/
 
 module "vault_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
