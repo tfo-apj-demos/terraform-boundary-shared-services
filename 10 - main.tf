@@ -21,7 +21,7 @@ resource "vault_token" "this" {
 
 module "nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.8.6"
+  version = "1.8.7"
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware NSX Admin"
@@ -42,7 +42,7 @@ module "nsx_target" {
 
 module "vcenter_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.8.6"
+  version = "1.8.7"
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware vCenter Admin"
@@ -65,7 +65,7 @@ module "vcenter_target" {
 
 module "vault_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.8.6"
+  version = "1.8.7"
 
   project_name    = "shared_services"
   hostname_prefix = "On-Prem Vault"
