@@ -35,6 +35,7 @@ module "nsx_target" {
     type             = "tcp"
     name             = "NSX Access"
     port             = 443
+    credential_paths = []
     alias            = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
   }]
 } 
@@ -78,6 +79,7 @@ module "vault_target" {
     type             = "tcp"
     name             = "GCVE Vault Access"
     port             = 8200
+    credential_paths = []
     alias            = "vault.hashicorp.local"
   }]
 }
