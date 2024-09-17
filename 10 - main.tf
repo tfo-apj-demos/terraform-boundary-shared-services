@@ -21,7 +21,7 @@ resource "vault_token" "this" {
 
 module "nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.5.6"
+  version = "1.8.6"
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware NSX Admin"
@@ -35,12 +35,13 @@ module "nsx_target" {
     type             = "tcp"
     name             = "NSX Access"
     port             = 443
+    alias            = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
   }]
 } 
 
 module "vcenter_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.5.6"
+  version = "1.8.6"
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware vCenter Admin"
@@ -57,12 +58,13 @@ module "vcenter_target" {
     name             = "vCenter Access"
     port             = 443
     credential_paths = ["ldap/creds/vsphere_access"]
+    alias            = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
   }]
 }
 
 module "vault_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.5.6"
+  version = "1.8.6"
 
   project_name    = "shared_services"
   hostname_prefix = "On-Prem Vault"
@@ -76,5 +78,6 @@ module "vault_target" {
     type             = "tcp"
     name             = "GCVE Vault Access"
     port             = 8200
+    alias            = "vault.hashicorp.local"
   }]
 }
