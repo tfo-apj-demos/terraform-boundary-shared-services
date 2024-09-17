@@ -21,3 +21,27 @@ output "vault_services_map_debug" {
 output "vault_target_map_debug" {
   value = module.vault_target.target_map_debug
 }
+
+output "vcenter_tcp_with_creds_target_debug" {
+  value = module.vcenter_target.tcp_with_creds_target_debug
+}
+
+output "vceneter_tcp_without_creds_target_debug" {
+  value = module.vcenter_target.tcp_without_creds_target_debug
+}
+
+output "nsx_tcp_with_creds_target_debug" {
+  value = module.nsx_target.tcp_with_creds_target_debug
+}
+
+output "nsx_tcp_without_creds_target_debug" {
+  value = module.nsx_target.tcp_without_creds_target_debug
+}
+
+output "vault_tcp_with_creds_target_debug" {
+  value = module.vault_target.tcp_with_creds_target_debug
+}
+
+output "vault_tcp_without_creds_target_debug" {
+  value = module.vault_target.tcp_without_creds_target_debug
+}
