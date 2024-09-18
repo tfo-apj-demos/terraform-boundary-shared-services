@@ -9,3 +9,7 @@ output "ssh_with_creds_target_ids" {
 output "alias_destination_ids" {
     value = module.nsx_target.alias_destination_ids
 }
+
+output "alias_debug_each_key" {
+    value = module.nsx_target.alias_debug_each_key
+}
