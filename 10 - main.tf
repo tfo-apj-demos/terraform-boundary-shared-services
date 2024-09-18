@@ -1,13 +1,3 @@
-data "boundary_scope" "org" {
-  scope_id = "global"
-  name     = "tfo_apj_demos"
-}
-
-data "boundary_scope" "project_scope" {
-  scope_id = data.boundary_scope.org.id
-  name     = "shared_services"
-}
-
 # Generate a Vault token for use in Boundary with a 2-hour renewal period.
 # The token is used with policies for reading LDAP credentials and revoking leases.
 resource "vault_token" "this" {
@@ -20,10 +10,9 @@ resource "vault_token" "this" {
 }
 
 module "nsx_target" {
-  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.8.9"
+  source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
-  project_name           = "shared_services"
+  project_name           = data.boundary_scope.project_scope.name
   hostname_prefix        = "On-Prem VMware NSX Admin"
 
   hosts = [{
@@ -32,19 +21,18 @@ module "nsx_target" {
   }]
 
   services = [{
-    type             = "tcp"
-    name             = "NSX Access"
-    port             = 443
-    credential_paths = []
-    alias            = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
+    name               = "NSX Access"
+    type               = "tcp"
+    port               = 443
+    use_existing_creds = false
+    use_vault_creds    = false
   }]
-} 
+}
 
 module "vcenter_target" {
-  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.8.9"
+  source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
-  project_name           = "shared_services"
+  project_name           = data.boundary_scope.project_scope.name
   hostname_prefix        = "On-Prem VMware vCenter Admin"
   credential_store_token = vault_token.this.client_token
   vault_address          = "https://vault.hashicorp.local:8200"
@@ -55,19 +43,19 @@ module "vcenter_target" {
   }]
 
   services = [{
-    type             = "tcp"
-    name             = "vCenter Access"
-    port             = 443
-    credential_paths = ["ldap/creds/vsphere_access"]
-    alias            = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
+    name               = "vCenter Access"
+    type               = "tcp"
+    port               = 443
+    use_existing_creds = false
+    use_vault_creds    = true
+    credential_path    = "ldap/creds/vsphere_access"
   }]
 }
 
 module "vault_target" {
-  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.8.9"
+  source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
-  project_name    = "shared_services"
+  project_name    = data.boundary_scope.project_scope.name
   hostname_prefix = "On-Prem Vault"
 
   hosts = [{
@@ -76,10 +64,10 @@ module "vault_target" {
   }]
 
   services = [{
-    type             = "tcp"
-    name             = "GCVE Vault Access"
-    port             = 8200
-    credential_paths = []
-    alias            = "vault.hashicorp.local"
+    name               = "GCVE Vault Access"
+    type               = "tcp"
+    port               = 8200
+    use_existing_creds = false
+    use_vault_creds    = false
   }]
 }
