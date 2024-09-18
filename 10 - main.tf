@@ -67,7 +67,7 @@ module "vault_target" {
     name               = "GCVE Vault Access"
     type               = "tcp"
     port               = 8200
-    use_existing_creds = true
-    use_vault_creds    = true
+    use_existing_creds = false
+    use_vault_creds    = false
   }]
 }
