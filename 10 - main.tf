@@ -21,7 +21,6 @@ module "nsx_target" {
   }]
 
   services = [{
-    name               = "NSX Access"
     type               = "tcp"
     port               = 443
     use_existing_creds = false
@@ -64,7 +63,6 @@ module "vault_target" {
   }]
 
   services = [{
-    name               = "GCVE Vault Access"
     type               = "tcp"
     port               = 8200
     use_existing_creds = false
