@@ -29,7 +29,7 @@ module "nsx_target" {
   }]
 }
 
-module "vcenter_target" {
+/*module "vcenter_target" {
   source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
   project_name           = "shared_services"
@@ -50,7 +50,7 @@ module "vcenter_target" {
     use_vault_creds    = true
     credential_path    = "ldap/creds/vsphere_access"
   }]
-}
+}*/
 
 module "vault_target" {
   source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
@@ -67,7 +67,7 @@ module "vault_target" {
     name               = "GCVE Vault Access"
     type               = "tcp"
     port               = 8200
-    use_existing_creds = false
-    use_vault_creds    = false
+    use_existing_creds = true
+    use_vault_creds    = true
   }]
 }
