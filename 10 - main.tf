@@ -28,7 +28,7 @@ module "nsx_target" {
   }]
 }
 
-/*module "vcenter_target" {
+module "vcenter_target" {
   source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
   project_name           = "shared_services"
@@ -42,14 +42,13 @@ module "nsx_target" {
   }]
 
   services = [{
-    name               = "vCenter Access"
     type               = "tcp"
     port               = 443
     use_existing_creds = false
     use_vault_creds    = true
     credential_path    = "ldap/creds/vsphere_access"
   }]
-}*/
+}
 
 module "vault_target" {
   source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
