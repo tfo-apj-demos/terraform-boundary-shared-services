@@ -13,7 +13,7 @@ module "nsx_target" {
   source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
   project_name           = "shared_services"
-  hostname_prefix        = "On-Prem VMware NSX Admin"
+  hostname_prefix        = "On-Prem VMware NSX-T Manager Console"
 
   hosts = [{
     fqdn  = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
@@ -31,7 +31,7 @@ module "vcenter_target" {
   source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
   project_name           = "shared_services"
-  hostname_prefix        = "On-Prem VMware vCenter Admin"
+  hostname_prefix        = "On-Prem VMware vCenter Console"
   credential_store_token = vault_token.this.client_token
   vault_address          = "https://vault.hashicorp.local:8200"
 
@@ -52,7 +52,7 @@ module "vault_target" {
   source  = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
   project_name    = "shared_services"
-  hostname_prefix = "On-Prem Vault"
+  hostname_prefix = "On-Prem HashiCorp Vault Console"
 
   hosts = [{
     fqdn  = "vault.hashicorp.local"
