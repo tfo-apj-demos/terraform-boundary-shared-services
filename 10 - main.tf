@@ -16,8 +16,7 @@ module "nsx_target" {
   hostname_prefix        = "On-Prem VMware NSX Admin"
 
   hosts = [{
-    hostname = "VMware NSX"
-    address  = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
+    fqdn  = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
   }]
 
   services = [{
@@ -37,8 +36,7 @@ module "vcenter_target" {
   vault_address          = "https://vault.hashicorp.local:8200"
 
   hosts = [{
-    hostname = "VMware vCenter"
-    address  = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
+    fqdn  = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
   }]
 
   services = [{
@@ -57,8 +55,7 @@ module "vault_target" {
   hostname_prefix = "On-Prem Vault"
 
   hosts = [{
-    hostname = "Vault Server"
-    address  = "vault.hashicorp.local"
+    fqdn  = "vault.hashicorp.local"
   }]
 
   services = [{
