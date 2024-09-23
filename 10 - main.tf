@@ -11,7 +11,7 @@ resource "vault_token" "this" {
 
 module "nsx_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "2.0.0"
+  version = "~> 2.0.1"
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware NSX-T Manager Console"
@@ -30,7 +30,7 @@ module "nsx_target" {
 
 module "vcenter_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "2.0.0"
+  version = "~> 2.0.1"
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware vCenter Console"
@@ -52,7 +52,7 @@ module "vcenter_target" {
 
 module "vault_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "2.0.0"
+  version = "~> 2.0.1"
 
   project_name    = "shared_services"
   hostname_prefix = "On-Prem HashiCorp Vault Console"
