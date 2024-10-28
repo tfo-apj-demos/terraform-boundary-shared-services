@@ -20,6 +20,7 @@ module "tcp_target" {
   credential_source    = "vault"
   credential_path      = "ldap/creds/vsphere_access"
   target_type          = "tcp"
+  use_host_set         = false
 }
 
 # module "nsx_target" {
