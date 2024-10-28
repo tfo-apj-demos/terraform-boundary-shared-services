@@ -16,8 +16,12 @@ module "vault_server_target" {
   hosts                = ["vault.hashicorp.local"]
   port                 = 8200
   target_type          = "tcp"
-  use_credentials      = false
   target_mode          = "single"
+
+  # Vault credential configurations
+  use_credentials      = false
+
+  # Alias name for accessing the GCVE Vault
   alias_name           = "vault.hashicorp.local"
 }
 
@@ -38,6 +42,22 @@ module "vcenter_target" {
 
   # Alias name for accessing the vCenter
   alias_name           = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
+}
+
+module "nsx_server_target" {
+  source               = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
+  project_name         = "shared_services"
+  target_name          = "NSX Server Access"
+  hosts                = ["nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"]
+  port                 = 443
+  target_type          = "tcp"
+  target_mode          = "single"
+
+  # Vault credential configurations
+  use_credentials      = false
+
+  # Alias name for accessing the GCVE Vault
+  alias_name           = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
 }
 
 # module "nsx_target" {
