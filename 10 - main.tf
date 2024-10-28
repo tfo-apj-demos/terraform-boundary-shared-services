@@ -16,7 +16,7 @@ module "tcp_target" {
   vault_address        = var.vault_address
   hosts                = var.hosts
   credential_store_token = vault_token.this.client_token
-  port                 = 443
+  port                 = 8200
   credential_source    = "vault"
   credential_path      = "ldap/creds/vsphere_access"
   target_type          = "tcp"
