@@ -18,6 +18,7 @@ module "vault_server_target" {
   target_type          = "tcp"
   use_credentials      = false
   target_mode          = "single"
+  alias_name           = "vault.hashicorp.local"
 }
 
 
