@@ -9,52 +9,75 @@ resource "vault_token" "this" {
   ]
 }
 
-/*module "nsx_target" {
-  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "~> 2.0.1"
-
-  project_name           = "shared_services"
-  hostname_prefix        = "On-Prem VMware NSX-T Manager Console"
-
-  hosts = [{
-    fqdn  = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
-  }]
-
-  services = [{
-    type               = "tcp"
-    port               = 443
-    use_existing_creds = false
-    use_vault_creds    = false
-  }]
-}*/
-
 module "tcp_target" {
   source               = "github.com/tfo-apj-demos/terraform-boundary-target"
+
   project_name         = "shared_services"
-  vault_address        = "https://vault.hashicorp.local:8200"
-  hosts                = ["vcsa-12345.hashicorp.local", "vcsa-67890.hashicorp.local"]
+  vault_address        = var.vault_address
+  hosts                = var.hosts
+  credential_store_token = vault_token.this.client_token
   port                 = 443
   credential_source    = "vault"
-  credential_store_token = vault_token.this.client_token
   credential_path      = "ldap/creds/vsphere_access"
   target_type          = "tcp"
 }
 
-/*module "vault_target" {
-  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "~> 2.0.1"
+# module "nsx_target" {
+#   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+#   version = "~> 2.0.1"
 
-  project_name    = "shared_services"
-  hostname_prefix = "On-Prem HashiCorp Vault Console"
+#   project_name           = "shared_services"
+#   hostname_prefix        = "On-Prem VMware NSX-T Manager Console"
 
-  hosts = [{
-    fqdn  = "vault.hashicorp.local"
-  }]
+#   hosts = [{
+#     fqdn  = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
+#   }]
 
-  services = [{
-    type               = "tcp"
-    port               = 8200
-    use_existing_creds = false
-    use_vault_creds    = false
-  }]
-}*/
+#   services = [{
+#     type               = "tcp"
+#     port               = 443
+#     use_existing_creds = false
+#     use_vault_creds    = false
+#   }]
+# }
+
+# module "vcenter_target" {
+#   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+#   version = "~> 2.0.1"
+
+#   project_name           = "shared_services"
+#   hostname_prefix        = "On-Prem VMware vCenter Console"
+#   credential_store_token = vault_token.this.client_token
+#   vault_address          = "https://vault.hashicorp.local:8200"
+
+#   hosts = [{
+#     fqdn  = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
+#   }]
+
+#   services = [{
+#     type               = "tcp"
+#     port               = 443
+#     use_existing_creds = false
+#     use_vault_creds    = true
+#     credential_path    = "ldap/creds/vsphere_access"
+#   }]
+# }
+
+# module "vault_target" {
+#   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+#   version = "~> 2.0.1"
+
+#   project_name    = "shared_services"
+#   hostname_prefix = "On-Prem HashiCorp Vault Console"
+
+#   hosts = [{
+#     fqdn  = "vault.hashicorp.local"
+#   }]
+
+#   services = [{
+#     type               = "tcp"
+#     port               = 8200
+#     use_existing_creds = false
+#     use_vault_creds    = false
+#   }]
+# }
