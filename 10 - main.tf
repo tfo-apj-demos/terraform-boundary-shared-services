@@ -17,10 +17,10 @@ module "tcp_target" {
   hosts                = var.hosts
   credential_store_token = vault_token.this.client_token
   port                 = 8200
-  credential_source    = "vault"
-  credential_path      = "ldap/creds/vsphere_access"
+  use_credentials      = false
   target_type          = "tcp"
   use_host_set         = false
+  use_credentials      = false
 }
 
 # module "nsx_target" {
