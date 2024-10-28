@@ -10,7 +10,7 @@ resource "vault_token" "this" {
 }
 
 module "tcp_target" {
-  source               = "github.com/tfo-apj-demos/terraform-boundary-target"
+  source               = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
   project_name         = "shared_services"
   vault_address        = var.vault_address
