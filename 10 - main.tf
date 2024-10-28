@@ -20,7 +20,6 @@ module "tcp_target" {
   use_credentials      = false
   target_type          = "tcp"
   use_host_set         = false
-  use_credentials      = false
 }
 
 # module "nsx_target" {
