@@ -29,8 +29,9 @@ module "nsx_target" {
 }
 
 module "vcenter_target" {
-  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "~> 2.0.1"
+  # source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+  # version = "~> 2.0.1"
+  source = github.com/tfo-apj-demos/terraform-boundary-target-refactored
 
   project_name           = "shared_services"
   hostname_prefix        = "On-Prem VMware vCenter Console"
