@@ -9,9 +9,6 @@ resource "vault_token" "this" {
   ]
 }
 
-output "vault_token" {
-  value = nonsensitive(vault_token.this.client_token)
-}
 
 module "vault_server_target" {
   source               = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
