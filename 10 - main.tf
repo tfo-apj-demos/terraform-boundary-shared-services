@@ -21,6 +21,24 @@ module "vault_server_target" {
   alias_name           = "vault.hashicorp.local"
 }
 
+module "vcenter_target" {
+  source               = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
+  project_name         = "shared_services"
+  target_name          = "vCenter Server Access"
+  hosts                = ["vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"]
+  port                 = 443
+  target_type          = "tcp"
+  
+  # Vault credential configurations
+  use_credentials      = true
+  credential_store_token = vault_token.this.client_token
+  vault_address        = "https://vault.hashicorp.local:8200"
+  credential_source    = "vault"
+  credential_path      = "ldap/creds/vsphere_access"
+
+  # Alias name for accessing the vCenter
+  alias_name           = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
+}
 
 # module "nsx_target" {
 #   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
