@@ -84,6 +84,7 @@ module "windows_remote_desktop_target" {
   # Alias name matching one of the Windows servers or a primary address for access
   alias_name           = "rds-01.hashicorp.local"
 
-  # Optionally specify target_mode if needed
-  target_mode          = "single"  # or "group" if multiple servers should be treated as one target
+  # Reference the existing credential store from vCenter target since it's already created 
+  # and you can't have multiple credential stores for the same project
+  existing_credential_store_id = module.vcenter_target.credential_store_id
 }
