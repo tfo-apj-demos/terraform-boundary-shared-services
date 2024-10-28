@@ -17,6 +17,7 @@ module "vault_server_target" {
   port                 = 8200
   target_type          = "tcp"
   use_credentials      = false
+  target_mode          = "single"
 }
 
 
