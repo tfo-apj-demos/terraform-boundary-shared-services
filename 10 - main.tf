@@ -9,18 +9,16 @@ resource "vault_token" "this" {
   ]
 }
 
-module "tcp_target" {
+module "vault_server_target" {
   source               = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
   project_name         = "shared_services"
-  vault_address        = var.vault_address
-  hosts                = var.hosts
-  credential_store_token = vault_token.this.client_token
+  hosts                = ["vault.hashicorp.local"]
   port                 = 8200
-  use_credentials      = false
   target_type          = "tcp"
-  use_host_set         = false
+  use_credentials      = false
 }
+
 
 # module "nsx_target" {
 #   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
