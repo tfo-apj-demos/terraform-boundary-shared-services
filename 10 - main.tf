@@ -11,8 +11,8 @@ resource "vault_token" "this" {
 
 module "vault_server_target" {
   source               = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
-
   project_name         = "shared_services"
+  target_name          = "Vault Server Access"
   hosts                = ["vault.hashicorp.local"]
   port                 = 8200
   target_type          = "tcp"
