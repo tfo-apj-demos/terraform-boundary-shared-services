@@ -85,3 +85,20 @@ module "windows_remote_desktop_target" {
   # and you can't have multiple credential stores for the same project
   existing_credential_store_id = module.vcenter_target.credential_store_id
 }
+
+# boundary module for https://aap-aap.apps.openshift-01.hashicorp.local/
+module "aap_target" {
+  source               = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
+
+  project_name         = "shared_services"
+  target_name          = "Ansible Automation Platform"
+  hosts                = ["aap-aap.apps.openshift-01.hashicorp.local"]
+  port                 = 443
+  target_type          = "tcp"
+
+  # Vault credential configurations
+  use_credentials      = false
+
+  # Alias name for accessing the AAP Openshift Console
+  alias_name           = "aap-aap.apps.openshift-01.hashicorp.local"
+}
