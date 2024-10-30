@@ -83,7 +83,7 @@ module "windows_remote_desktop_target" {
 
   # Reference the existing credential store from vCenter target since it's already created 
   # and you can't have multiple credential stores for the same project
-  existing_credential_store_id = module.vcenter_target.credential_store_id
+  existing_credential_store_id = module.vcenter_target.credential_store_id 
 }
 
 # boundary module for https://aap-aap.apps.openshift-01.hashicorp.local/
