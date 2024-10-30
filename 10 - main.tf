@@ -9,7 +9,6 @@ resource "vault_token" "this" {
   ]
 }
 
-
 module "vault_server_target" {
   source = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
 
@@ -85,9 +84,9 @@ module "windows_remote_desktop_target" {
   alias_name = "rds-01.hashicorp.local"
 }
 
-# boundary module for https://aap-aap.apps.openshift-01.hashicorp.local/
 module "aap_target" {
-  source = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
+  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
 
   project_name = "shared_services"
   target_name  = "Ansible Automation Platform"
