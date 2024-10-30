@@ -10,7 +10,8 @@ resource "vault_token" "this" {
 }
 
 module "vault_server_target" {
-  source = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
+  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
 
   project_name = "shared_services"
   target_name  = "Vault Server Access"
@@ -26,7 +27,8 @@ module "vault_server_target" {
 }
 
 module "vcenter_target" {
-  source = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
+  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
 
   project_name = "shared_services"
   target_name  = "vCenter Server Access"
@@ -46,7 +48,8 @@ module "vcenter_target" {
 }
 
 module "nsx_server_target" {
-  source = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
+  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
 
   project_name = "shared_services"
   target_name  = "NSX Server Access"
@@ -62,7 +65,8 @@ module "nsx_server_target" {
 }
 
 module "windows_remote_desktop_target" {
-  source = "github.com/tfo-apj-demos/terraform-boundary-target-refactored"
+  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
 
   project_name = "shared_services"
   target_name  = "Windows Remote Desktop Server"
