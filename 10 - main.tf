@@ -32,7 +32,7 @@ module "vcenter_target" {
 
   project_name = "shared_services"
   target_name  = "vCenter Server Access"
-  hosts        = ["vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"]
+  hosts        = var.vcenter_server_target
   port         = 443
   target_type  = "tcp"
 
@@ -44,7 +44,7 @@ module "vcenter_target" {
   credential_path        = "ldap/creds/vsphere_access"
 
   # Alias name for accessing the vCenter
-  alias_name = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
+  alias_name = var.vcenter_server_target[0]
 }
 
 module "nsx_server_target" {
@@ -53,7 +53,7 @@ module "nsx_server_target" {
 
   project_name = "shared_services"
   target_name  = "NSX Server Access"
-  hosts        = ["nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"]
+  hosts        = var.nsx_server_target
   port         = 443
   target_type  = "tcp"
 
@@ -61,7 +61,7 @@ module "nsx_server_target" {
   use_credentials = false
 
   # Alias name for accessing the GCVE Vault
-  alias_name = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
+  alias_name = var.nsx_server_target[0]
 }
 
 module "windows_remote_desktop_target" {
@@ -70,7 +70,7 @@ module "windows_remote_desktop_target" {
 
   project_name = "shared_services"
   target_name  = "Windows Remote Desktop Server"
-  hosts        = ["rds-01.hashicorp.local"]
+  hosts        = var.windows_remote_desktop_target
   port         = 3389
   target_type  = "tcp"
 
@@ -85,7 +85,7 @@ module "windows_remote_desktop_target" {
   existing_credential_store_id = module.vcenter_target.credential_store_id
 
   # Alias name matching one of the Windows servers or a primary address for access
-  alias_name = "rds-01.hashicorp.local"
+  alias_name = var.windows_remote_desktop_target[0]
 }
 
 module "aap_target" {
