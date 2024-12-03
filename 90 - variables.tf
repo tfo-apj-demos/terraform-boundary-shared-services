@@ -1,11 +1,17 @@
-variable "vault_address" {
-  type        = string
-  description = "Address of the Vault server for credential management."
+variable "boundary_address" {
+  type = string
 }
 
-variable "hosts" {
-  type        = list(string)
-  description = "List of FQDNs for the hosts."
+variable "service_account_authmethod_id" {
+  type = string
+}
+
+variable "service_account_name" {
+  type = string
+}
+
+variable "service_account_password" {
+  type = string
 }
 
 variable "vcenter_server_target" {
@@ -31,20 +37,4 @@ variable "vault_server_target" {
 variable "aap_server_target" {
   type        = list(string)
   description = "Enable AAP Server target."
-}
-
-variable "boundary_address" {
-  type = string
-}
-
-variable "service_account_authmethod_id" {
-  type = string
-}
-
-variable "service_account_name" {
-  type = string
-}
-
-variable "service_account_password" {
-  type = string
 }
