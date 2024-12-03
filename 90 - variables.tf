@@ -23,6 +23,16 @@ variable "windows_remote_desktop_target" {
   description = "Enable Remote Desktop target."
 }
 
+variable "vault_server_target" {
+  type        = list(string)
+  description = "Enable Vault Server target."
+}
+
+variable "aap_server_target" {
+  type        = list(string)
+  description = "Enable AAP Server target."
+}
+
 variable "boundary_address" {
   type = string
 }

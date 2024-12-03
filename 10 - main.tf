@@ -15,7 +15,7 @@ module "vault_server_target" {
 
   project_name = "shared_services"
   target_name  = "Vault Server Access"
-  hosts        = ["vault.hashicorp.local"]
+  hosts        = var.vault_server_target
   port         = 8200
   target_type  = "tcp"
 
@@ -23,7 +23,7 @@ module "vault_server_target" {
   use_credentials = false
 
   # Alias name for accessing the GCVE Vault
-  alias_name = "vault.hashicorp.local"
+  alias_name = var.vault_server_target[0]
 }
 
 module "vcenter_target" {
@@ -39,7 +39,7 @@ module "vcenter_target" {
   # Vault credential configurations
   use_credentials        = true
   credential_store_token = vault_token.this.client_token
-  vault_address          = "https://vault.hashicorp.local:8200"
+  vault_address = "https://${var.vault_server_target[0]}:8200"
   credential_source      = "vault"
   credential_path        = "ldap/creds/vsphere_access"
 
@@ -77,7 +77,7 @@ module "windows_remote_desktop_target" {
   # Vault credential configurations
   use_credentials        = true
   credential_store_token = vault_token.this.client_token
-  vault_address          = "https://vault.hashicorp.local:8200"
+  vault_address = "https://${var.vault_server_target[0]}:8200"
   credential_source      = "vault"
   credential_path        = "ldap/creds/vault_ldap_dynamic_demo_role"
   # Reference the existing credential store from vCenter target since it's already created 
@@ -94,7 +94,7 @@ module "aap_target" {
 
   project_name = "shared_services"
   target_name  = "Ansible Automation Platform"
-  hosts        = ["aap-aap.apps.openshift-01.hashicorp.local"]
+  hosts        = var.aap_server_target
   port         = 443
   target_type  = "tcp"
 
@@ -102,5 +102,5 @@ module "aap_target" {
   use_credentials = false
 
   # Alias name for accessing the AAP Openshift Console
-  alias_name = "aap-aap.apps.openshift-01.hashicorp.local"
+  alias_name = var.aap_server_target[0]
 }
