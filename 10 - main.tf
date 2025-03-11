@@ -104,3 +104,21 @@ module "aap_target" {
   # Alias name for accessing the AAP Openshift Console
   alias_name = var.aap_server_target[0]
 }
+
+
+module "openshift_target" {
+  source  = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
+
+  project_name = "shared_services"
+  target_name  = "Openshift Console"
+  hosts        = var.openshift_server_target
+  port         = 443
+  target_type  = "tcp"
+
+  # Vault credential configurations
+  use_credentials = false
+
+  # Alias name for accessing the AAP Openshift Console
+  alias_name = var.openshift_server_target[0]
+}

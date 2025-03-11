@@ -38,3 +38,8 @@ variable "aap_server_target" {
   type        = list(string)
   description = "Enable AAP Server target."
 }
+
+variable "openshift_server_target" {
+  type        = list(string)
+  description = "Enable OpenShift Server target."
+}
