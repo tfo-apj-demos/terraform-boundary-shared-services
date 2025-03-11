@@ -122,3 +122,39 @@ module "openshift_target" {
   # Alias name for accessing the AAP Openshift Console
   alias_name = var.openshift_server_target[0]
 }
+
+# Oauth Target for Openshift Console
+module "oauth_target" {
+  source = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
+
+  project_name = "shared_services"
+  target_name  = "OAuth for OpenShift"
+  hosts        = ["oauth-openshift.apps.openshift-01.hashicorp.local"]
+  port         = 443
+  target_type  = "tcp"
+
+  # Vault credential configurations
+  use_credentials = false
+
+  # Alias name for accessing the AAP Openshift Console
+  alias_name = "oauth-openshift.apps.openshift-01.hashicorp.local"
+}
+
+# API Target for Openshift
+module "api_target" {
+  source = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
+
+  project_name = "shared_services"
+  target_name  = "API for OpenShift"
+  hosts        = ["api.openshift-01.hashicorp.local"]
+  port         = 6443
+  target_type  = "tcp"
+
+  # Vault credential configurations
+  use_credentials = false
+
+  # Alias name for accessing the Openshift API
+  alias_name = "api.openshift-01.hashicorp.local"
+}
