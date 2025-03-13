@@ -158,3 +158,21 @@ module "api_target" {
   # Alias name for accessing the Openshift API
   alias_name = "api.openshift-01.hashicorp.local"
 }
+
+
+module "ssh_target" {
+  source = "app.terraform.io/tfo-apj-demos/target/boundary"
+  version = "3.0.0"
+
+  project_name = "shared_services"
+  target_name  = "ssh bastion"
+  hosts        = ["172.21.16.143"]
+  port         = 22
+  target_type  = "tcp"
+
+  # Vault credential configurations
+  use_credentials = false
+
+  # Alias name for accessing the Openshift API
+  alias_name = "172.21.16.143"
+}
