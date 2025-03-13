@@ -170,9 +170,7 @@ module "ssh_target" {
   port         = 22
   target_type  = "tcp"
 
-  # Vault credential configurations
   use_credentials = false
 
-  # Alias name for accessing the Openshift API
-  alias_name = "172.21.16.143"
+  alias_name = "ssh.hashicorp.local"
 }
