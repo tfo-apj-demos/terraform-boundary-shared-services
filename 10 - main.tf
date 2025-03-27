@@ -166,7 +166,7 @@ module "ssh_target" {
 
   project_name = "shared_services"
   target_name  = "ssh bastion"
-  hosts        = ["172.21.16.143"]
+  hosts        = ["172.21.12.154"]
   port         = 22
   target_type  = "tcp"
 
